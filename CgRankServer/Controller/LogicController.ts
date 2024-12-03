@@ -1,6 +1,7 @@
 import * as _ from "underscore";
 import { cg } from "cgserver";
 import { CommandItem, GRankSer } from "../Logic/RankService";
+import { GCgRankCfg } from "../Config/CgRankConfig";
 
 //先去掉其他的，只支持OpenSocial登陆
 export class LogicController extends cg.BaseController
@@ -11,6 +12,16 @@ export class LogicController extends cg.BaseController
         if(!msg)
         {
             this.showJson({errcode:{id:1,msg:"msg is null"}})
+            return
+        }
+        if(!msg.password)
+        {
+            this.showJson({errcode:{id:1,msg:"password is null"}})
+            return
+        }
+        if(msg.password!=GCgRankCfg.password)
+        {
+            this.showJson({errcode:{id:1,msg:"password is error"}})
             return
         }
         let cmd = (msg.cmd||"").toLowerCase()

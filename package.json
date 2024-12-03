@@ -8,7 +8,7 @@
   },
   "dependencies": {
     "@types/node": "^22.0.0",
-    "cgserver": "^10.1.2",
+    "cgserver": "^10.2.0",
     "tslib": "^2.4.1",
     "underscore": "^1.13.4",
     "yargs": "^17.7.2"
