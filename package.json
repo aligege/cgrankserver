@@ -1,0 +1,20 @@
+{
+  "name": "dygame",
+  "version": "1.0.0",
+  "description": "cgrankserver",
+  "author": {
+    "name": "mumagege",
+    "email": "chengang01@live.com"
+  },
+  "dependencies": {
+    "@types/node": "^22.0.0",
+    "cgserver": "^10.1.2",
+    "tslib": "^2.4.1",
+    "underscore": "^1.13.4",
+    "yargs": "^17.7.2"
+  },
+  "devDependencies": {
+    "webpack-cli": "^5.1.4",
+    "webpack-node-externals": "^3.0.0"
+  }
+}

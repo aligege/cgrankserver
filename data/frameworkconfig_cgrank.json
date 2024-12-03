@@ -1,0 +1,22 @@
+{
+    "webserver":
+    {
+        "port":10050,
+        "cache":{},
+        "session_type":2,
+        "debug":true,
+        "web_name":"cgrank",
+        "routs":
+        {
+            "onlyModule":"cgrank",
+            "defaults": { "module":"cgrank","controller" : "logic", "action" : "index"}
+        },
+        "cors":
+        {
+            "origin":"*",  
+            "methods":["GET","POST"],
+            "allowedHeaders":"Content-Type",
+            "credentials":true
+        }
+    }
+}
