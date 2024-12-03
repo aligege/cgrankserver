@@ -76,14 +76,19 @@ export class LogicController extends cg.BaseController
         }
         if(cmd=="removefromrank")
         {
-            GRankSer.removeFromRank(msg.key||"",msg.id||"")
-            this.showJson()
+            let rank = GRankSer.removeFromRank(msg.key||"",msg.id||"")
+            this.showJson({rank:rank})
             return
         }
         if(cmd=="updateinrank")
         {
-            let ranks = GRankSer.executeCommand(msg.key||"",msg.command)
-            this.showJson({ranks:ranks})
+            let ranks = GRankSer.executeCommand(msg.key||"",{[msg.command.id]:msg.command})
+            let rank=null
+            if(ranks.length>0)
+            {
+                rank=ranks[0]
+            }
+            this.showJson({rank:rank})
             return
         }
         if(cmd=="updatesinrank")

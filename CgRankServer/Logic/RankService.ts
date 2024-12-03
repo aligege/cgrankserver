@@ -62,10 +62,10 @@ class RankService {
     getRankItems(key:string,ids:string[])
     {
         let rankdata=this._checkRank(key)
-        let result:RankItem[]=[]
+        let result:{[id:string]:RankItem}={}
         for(let id of ids)
         {
-            result.push(rankdata.maps[id])
+            result[id]=rankdata.maps[id]
         }
         return result
     }
@@ -153,16 +153,21 @@ class RankService {
             }
         }
         this._checkRank(key)
-        let rankitems:RankItem[]=[]
+        let rankitems:{[id:string]:RankItem}={}
         for(let id in datas)
         {
-            rankitems.push(this.addToRank(key,id,datas[id].score,datas[id].other,isreplace))
+            let rank = this.addToRank(key,id,datas[id].score,datas[id].other,isreplace)
+            if(rank)
+            {
+                rankitems[id]=rank
+            }
         }
         return rankitems
     }
     removeFromRank(key:string,id:string)
     {
         this._checkRank(key)
+        let rankitem = this._ranks[key].maps[id]
         delete this._ranks[key].maps[id]
         let list = this._ranks[key].list
         let index = list.findIndex(item => item.id === id)
@@ -175,6 +180,7 @@ class RankService {
         for(let i = 0; i < list.length; i++) {
             list[i].rank = i + 1
         }
+        return rankitem
     }
     protected _sortRank(key:string,id:string)
     {
