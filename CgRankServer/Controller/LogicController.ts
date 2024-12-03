@@ -25,73 +25,85 @@ export class LogicController extends cg.BaseController
             return
         }
         let cmd = (msg.cmd||"").toLowerCase()
-        if(cmd=="removerank")
+        if(cmd=="settimeout")
+        {
+            GRankSer.setTimeout(msg.key||"",msg.timeout||0)
+            this.showJson()
+            return
+        }
+        else if(cmd=="gettimeout")
+        {
+            let timeout = GRankSer.getTimeout(msg.key||"")
+            this.showJson({timeout:timeout})
+            return
+        }
+        else if(cmd=="removerank")
         {
             GRankSer.removeRank(msg.key||"")
             this.showJson()
             return
         }
-        if(cmd=="saveallrank")
+        else if(cmd=="saveallrank")
         {
             GRankSer.saveAllRank()
             this.showJson()
             return
         }
-        if(cmd=="getallrankkeys")
+        else if(cmd=="getallrankkeys")
         {
             let keys = GRankSer.getAllRankKeys()
             this.showJson({keys:keys})
             return
         }
-        if(cmd=="getrankitem")
+        else if(cmd=="getrankitem")
         {
             let rank = GRankSer.getRankItem(msg.key||"",msg.id||"")
             this.showJson({rank:rank})
             return
         }
-        if(cmd=="getrankitems")
+        else if(cmd=="getrankitems")
         {
             let ranks = GRankSer.getRankItems(msg.key||"",msg.ids||[])
             this.showJson({ranks:ranks})
             return
         }
-        if(cmd=="getranklist")
+        else if(cmd=="getranklist")
         {
             let ranks = GRankSer.getRankList(msg.key||"",msg.start||0,msg.count||0)
             this.showJson({ranks:ranks})
             return
         }
-        if(cmd=="getrankcount")
+        else if(cmd=="getrankcount")
         {
             let count = GRankSer.getRankCount(msg.key||"")
             this.showJson({count:count})
             return
         }
-        if(cmd=="getrevranklist")
+        else if(cmd=="getrevranklist")
         {
             let ranks = GRankSer.getRevRankList(msg.key||"",msg.start||0,msg.count||10)
             this.showJson({ranks:ranks})
             return
         }
-        if(cmd=="addtorank")
+        else if(cmd=="addtorank")
         {
             let rank = GRankSer.addToRank(msg.key||"",msg.id||"",msg.score||0,msg.other||{},msg.isreplace||false)
             this.showJson({rank:rank})
             return
         }
-        if(cmd=="addstorank")
+        else if(cmd=="addstorank")
         {
             let ranks = GRankSer.addsToRank(msg.key||"",msg.datas||{},msg.isreplace||false)
             this.showJson({ranks:ranks})
             return
         }
-        if(cmd=="removefromrank")
+        else if(cmd=="removefromrank")
         {
             let rank = GRankSer.removeFromRank(msg.key||"",msg.id||"")
             this.showJson({rank:rank})
             return
         }
-        if(cmd=="updateinrank")
+        else if(cmd=="updateinrank")
         {
             let ranks = GRankSer.executeCommand(msg.key||"",{[msg.command.id]:msg.command})
             let rank=null
@@ -102,19 +114,19 @@ export class LogicController extends cg.BaseController
             this.showJson({rank:rank})
             return
         }
-        if(cmd=="updatesinrank")
+        else if(cmd=="updatesinrank")
         {
             let ranks = GRankSer.executeCommand(msg.key||"",msg.commands||{})
             this.showJson({ranks:ranks})
             return
         }
-        if(cmd=="executecommand")
+        else if(cmd=="executecommand")
         {
             let ranks = GRankSer.executeCommand(msg.key||"",msg.commands||{})
             this.showJson({ranks:ranks})
             return
         }
-        if(cmd=="anycall")
+        else if(cmd=="anycall")
         {
             let call = msg.call
             if(!call)

@@ -28,6 +28,16 @@ export class CommandItem
 }
 class RankService {
     protected _ranks:{[key:string]:RankData}={}
+    setTimeout(key:string,timeout:number)
+    {
+        let rankdata=this._checkRank(key)
+        rankdata.timeout=timeout
+    }
+    getTimeout(key:string)
+    {
+        let rankdata=this._checkRank(key)
+        return rankdata.timeout
+    }
     removeRank(key:string)
     {
         this.saveRank(key)
